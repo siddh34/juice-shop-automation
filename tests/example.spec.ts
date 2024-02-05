@@ -4,7 +4,7 @@ import { test, expect, Page } from '@playwright/test';
 async function generateTraffic(page: Page, userCount: number) {
   // const res: any = fs.readFileSync('./res-juice.text');
   // const url = res.toString();
-  const url = `http://34.31.166.79:8000/`
+  const url = `http://34.70.128.114:8000/`
   console.log("url", url);
   //  for number of users
   if (!userCount) {
@@ -55,6 +55,7 @@ async function spinUpUsers(page: Page, url: string, i: number) {
   await page.getByLabel('Text field for the login password').fill('1234567');
   await page.getByLabel('Login', { exact: true }).click();
   await page.locator('mat-card').filter({ hasText: 'Banana Juice (1000ml) 1.99¤Add to Basket' }).getByLabel('Add to Basket').click();
+  await page.waitForTimeout(1000);
   await page.getByLabel('Show the shopping cart').click();
   await page.getByRole('button', { name: 'Checkout' }).click();
   await page.getByLabel('Add a new address').click();
