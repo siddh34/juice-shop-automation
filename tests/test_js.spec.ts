@@ -4,7 +4,7 @@ import { test, expect, Page } from '@playwright/test';
 async function generateTraffic(page: Page, userCount: number) {
   // const res: any = fs.readFileSync('./res-juice.text');
   // const url = res.toString();
-  const url = `http://34.70.128.114:8000/`
+  const url = `http://192.168.49.2:30854/`
   console.log("url", url);
   //  for number of users
   if (!userCount) {
@@ -48,12 +48,14 @@ async function spinUpUsers(page: Page, url: string, i: number) {
   await page.getByPlaceholder('Answer to your security question').click();
   await page.getByPlaceholder('Answer to your security question').fill('do');
   await page.getByLabel('Button to complete the registration').click();
+  await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'X' }).click();
   await page.getByLabel('Text field for the login email').click();
   await page.getByLabel('Text field for the login email').fill(email);
   await page.getByLabel('Text field for the login password').click();
   await page.getByLabel('Text field for the login password').fill('1234567');
   await page.getByLabel('Login', { exact: true }).click();
+  await page.waitForTimeout(1000);
   await page.locator('mat-card').filter({ hasText: 'Banana Juice (1000ml) 1.99¤Add to Basket' }).getByLabel('Add to Basket').click();
   await page.waitForTimeout(1000);
   await page.getByLabel('Show the shopping cart').click();
@@ -75,6 +77,7 @@ async function spinUpUsers(page: Page, url: string, i: number) {
   await page.getByPlaceholder('Please provide a state.').click();
   await page.getByPlaceholder('Please provide a state.').fill('wefwef');
   await page.getByRole('button', { name: 'send Submit' }).click();
+  await page.waitForTimeout(1000);
   // await page.locator('label').click();
   // await page.getByRole('cell', { name: 'swfewefwef, wefwef, wefwef, 234234' }).click();
   await page.getByRole('cell', { name: 'swfewefwef, wefwef, wefwef, 234234' }).click();
@@ -95,14 +98,18 @@ async function spinUpUsers(page: Page, url: string, i: number) {
   await page.getByRole('row', { name: '************2343 wefwef 4/2084' }).locator('label').click();
   await page.getByLabel('Proceed to review').click();
   await page.getByLabel('Complete your purchase').click();
+  await page.waitForTimeout(1000);
   await page.getByLabel('Show/hide account menu').click();
+  await page.waitForTimeout(1000);
   await page.getByRole('menuitem', { name: 'Go to user profile' }).click();
   await page.locator('div').filter({ hasText: 'Image URL:' }).nth(4).click();
   await page.locator("#url").click();
   // await page.getByPlaceholder('e.g. https://www.gravatar.com/avatar/93585519347f6b5e15e4f186e2d0a82a').fill('https://cdn.pixabay.com/photo/2015/03/10/17/23/youtube-667451_1280.png');
+  await page.waitForTimeout(1000);
   await page.getByLabel('Button to include image from link').click();
   await page.goto(url + '/profile');
   await page.getByRole('link', { name: 'arrow_back' }).click();
+  await page.waitForTimeout(1000);
   await page.getByLabel('Open Sidenav').click();
   await page.getByLabel('Go to contact us page').click();
   await page.getByPlaceholder('What did you like or dislike?').click();
@@ -129,9 +136,12 @@ async function spinUpUsers(page: Page, url: string, i: number) {
   await page.getByLabel('Close Dialog').click();
   await page.goto(
     url + "rest/products/search?q=apple%27%29%29UNION%20SELECT%20sql,2,3,4,5,6,7,8,9%20FROM%20sqlite_master--",
-);
+  );
+  await page.waitForTimeout(1000);
   await page.goto(url + "rest/products/search?q=<b%20<script>alert%281%29<%2Fscript>0");
+  await page.waitForTimeout(1000);
   await page.goto(url + "rest/products/search?q=cat%20%2Fetc%2Fhosts");
+  await page.waitForTimeout(1000);
   console.log("Incidents are created!");
 }
 
