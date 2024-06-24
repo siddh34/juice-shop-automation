@@ -4,7 +4,8 @@ import { test, expect, Page } from '@playwright/test';
 async function generateTraffic(page: Page, userCount: number) {
   // const res: any = fs.readFileSync('./res-juice.text');
   // const url = res.toString();
-  const url = `http://acf20c1830e2149b2944be14c4621651-735567977.us-east-2.elb.amazonaws.com:8000`
+  const url = `http://172.18.0.2:30281/`;
+  console.log("url", url);
   //  for number of users
   if (!userCount) {
     userCount = 1;
