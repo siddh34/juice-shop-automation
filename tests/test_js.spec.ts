@@ -4,8 +4,7 @@ import { test, expect, Page } from '@playwright/test';
 async function generateTraffic(page: Page, userCount: number) {
   // const res: any = fs.readFileSync('./res-juice.text');
   // const url = res.toString();
-  const url = `http://192.168.49.2:30854/`
-  console.log("url", url);
+  const url = `http://acf20c1830e2149b2944be14c4621651-735567977.us-east-2.elb.amazonaws.com:8000`
   //  for number of users
   if (!userCount) {
     userCount = 1;
@@ -135,12 +134,12 @@ async function spinUpUsers(page: Page, url: string, i: number) {
   await page.getByLabel('Send the review').click();
   await page.getByLabel('Close Dialog').click();
   await page.goto(
-    url + "rest/products/search?q=apple%27%29%29UNION%20SELECT%20sql,2,3,4,5,6,7,8,9%20FROM%20sqlite_master--",
+    url + "/rest/products/search?q=apple%27%29%29UNION%20SELECT%20sql,2,3,4,5,6,7,8,9%20FROM%20sqlite_master--",
   );
   await page.waitForTimeout(1000);
-  await page.goto(url + "rest/products/search?q=<b%20<script>alert%281%29<%2Fscript>0");
+  await page.goto(url + "/rest/products/search?q=<b%20<script>alert%281%29<%2Fscript>0");
   await page.waitForTimeout(1000);
-  await page.goto(url + "rest/products/search?q=cat%20%2Fetc%2Fhosts");
+  await page.goto(url + "/rest/products/search?q=cat%20%2Fetc%2Fhosts");
   await page.waitForTimeout(1000);
   console.log("Incidents are created!");
 }
@@ -164,3 +163,4 @@ test('Traffic for juice-shop', async ({ page }) => {
 //   // Expects page to have a heading with the name of Installation.
 //   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 // });
+// 
